@@ -135,10 +135,10 @@
 
 .task-manager__task-text{
     margin: 0;
-    overflow: hidden;
+    overflow-x: scroll;
     max-height: 23px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    margin-right: 20px;
+    overflow-y: hidden;
 }
 
 .task-manager__task_complete {

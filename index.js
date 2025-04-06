@@ -169,7 +169,7 @@ containerBtnsThemes.addEventListener('click', event => {
 })
 
 buttonTaskAdd.addEventListener('click', (event => {
-    const taskText = inputTask.value
+    const taskText = inputTask.value.replaceAll(' ','_')
     if (!taskText) return
     const {currentDate, dateInSeconds} = getDate()
     arrayTasks.push({text: taskText, date: currentDate, dateInSeconds: dateInSeconds, isComplete: false, id: currentId})

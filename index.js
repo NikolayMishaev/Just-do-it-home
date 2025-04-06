@@ -11,10 +11,11 @@ const paginationPanel = document.querySelector('.task-manager__pagination-panel'
 const buttonPrevPagination = document.querySelector('.task-manager__button_pagination_prev')
 const buttonNextPagination = document.querySelector('.task-manager__button_pagination_next')
 const page = document.querySelector('.task-manager__page')
+const taskmanager = document.querySelector('.task-manager')
 
 let arrayTasks = []
 let currentPage = 0
-let countTasksOnPage = 5
+let countTasksOnPage = 4
 let currentId = 1
 
 const addClasses = (element, ...className) => element.classList.add(...className)
@@ -191,6 +192,17 @@ buttonNextPagination.addEventListener('click', ()=> {
     saveToLocalStorage('page', currentPage)
     sliceTasks()
 })
+
+// window.addEventListener('orientationchange',()=> {
+//     if (window.matchMedia("(orientation: portrait)").matches) {
+//         console.log('portrait')
+//         addClasses(taskmanager, 'horizont')
+//     }
+//     if (window.matchMedia("(orientation: landscape)").matches) {
+//         console.log('landscape')
+//         removeClasses(taskmanager, 'horizont')
+//     }
+// })
 
 loadDataFromLocalStorage()
 viewTasks()

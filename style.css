@@ -12,7 +12,7 @@
 }
 
 .task-manager {
-    padding-top: 12vh;
+    padding-top: 14vh;
     padding-right: 100px;
     min-width: 430px;
 }
@@ -118,7 +118,7 @@
     padding: 0;
     margin: 0 auto;
     padding-right: 15px;
-    min-height: 300px;
+    min-height: 250px;
 }
 
 .task-manager__task {
@@ -310,20 +310,21 @@
     background-color: rgb(174, 167, 167);;
 }
 
-/* mixins */
 
-.display-none {
-    display: none;
-}
 
 @media (max-width: 900px) {
     .task-manager {
         padding-right: 0;
+        padding-top: 90px;
     }
 
 }
 
 @media (max-width: 700px) {
+    .task-manager {
+        width: 100%;
+        min-width: 330px;
+    }
     .task-manager__title {
         font-size: 14vw;
         padding: 0;
@@ -337,16 +338,18 @@
     }
 }
 
-@media (max-width: 500px) {
-    .task-manager {
-        width: 100%;
-        padding-top: 12vh;
-        min-width: 330px;
-    }
-}
-
 @media (max-width: 400px) {
     .task-manager__title {
         font-size: 55px;
     }
+}
+
+/* mixins */
+
+.display-none {
+    display: none;
+}
+
+.horizont {
+    padding-top: 22vw;
 }

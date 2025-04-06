@@ -194,6 +194,23 @@
     background-color: rgb(243, 202, 200);
 }
 
+.task-manager__page:hover {
+    transform: scale(1.1);
+    transition-duration: .5s;
+    cursor: pointer;
+    opacity: .7;
+}
+
+.task-manager__input-page {
+    flex-grow: unset;
+    border-radius: 16px;
+    width: 60px;
+    padding: 0;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 .body_theme_white {
     background-image: none;
     background-color: white;

@@ -12,6 +12,7 @@ const buttonPrevPagination = document.querySelector('.task-manager__button_pagin
 const buttonNextPagination = document.querySelector('.task-manager__button_pagination_next')
 const page = document.querySelector('.task-manager__page')
 const taskmanager = document.querySelector('.task-manager')
+const inputPage = document.querySelector('.task-manager__input-page')
 
 let arrayTasks = []
 let currentPage = 0
@@ -84,10 +85,9 @@ const deleteTask = (event) => {
 }
 
 const selectTask = (event) => {
-    console.log(event.target.className.includes('button'))
     if (event.target.className.includes('button')) return
     const currentTask = event.target.closest('li')
-    if (currentTask.className.endsWith('border-red')) {
+    if (currentTask && currentTask.className.endsWith('border-red')) {
         removeClasses(currentTask,'border-red')
         updateDate()
         return
@@ -221,6 +221,21 @@ buttonNextPagination.addEventListener('click', ()=> {
 //         removeClasses(taskmanager, 'horizont')
 //     }
 // })
+
+page.addEventListener('click',() => {
+    addClasses(page, 'display-none')
+    removeClasses(inputPage, 'display-none')
+})
+
+inputPage.addEventListener('change', (e) => {
+    const newCountTaskOnPage = Number(e.target.value)
+    if (typeof newCountTaskOnPage === 'number' && newCountTaskOnPage > 0 && newCountTaskOnPage < 21) {
+        countTasksOnPage = newCountTaskOnPage
+    }
+    addClasses(inputPage, 'display-none')
+    removeClasses(page, 'display-none')
+    viewTasks()
+})
 
 loadDataFromLocalStorage()
 viewTasks()

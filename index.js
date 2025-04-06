@@ -177,6 +177,7 @@ buttonTaskAdd.addEventListener('click', (event => {
     saveToLocalStorage('arrayTasks', arrayTasks)
     saveToLocalStorage('id', currentId)
     viewTasks()
+    inputTask.value = ''
 }))
 
 buttonPrevPagination.addEventListener('click', ()=> {

@@ -101,7 +101,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     position: absolute;
     width: 130px;
     top: -55px;
-    left: 150px;
+    left: 165px;
     color: rgb(164, 154, 163);
     font-size: 13px;
     transition: .5s;

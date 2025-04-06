@@ -340,12 +340,13 @@
 @media (max-width: 500px) {
     .task-manager {
         width: 100%;
-        padding: 12vh 15px;
+        padding-top: 12vh;
+        min-width: 330px;
     }
+}
+
+@media (max-width: 400px) {
     .task-manager__title {
-        font-size: 70px;
-    }
-    .task-manager__line {
-        height: 85px;
+        font-size: 55px;
     }
 }

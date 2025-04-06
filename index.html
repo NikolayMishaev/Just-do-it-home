@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task manager</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="index.js"></script>
+</head>
+<body class="body">
+    <div class="task-manager">
+        <div class="task-manager__theme">
+            <button class="task-manager__button task-manager__button_theme_grey"></button>
+            <button class="task-manager__button task-manager__button_theme_white"></button>
+            <button class="task-manager__button task-manager__button_theme_black"></button>
+        </div>
+        <h1 class = 'task-manager__title'>Just do it.<div class="task-manager__line"></div></h1>
+        <div class="task-manager__input-panel">
+            <input class="task-manager__input" placeholder="Add a task.">
+            <button class="task-manager__button task-manager__button_task_add">I Got This!</button>
+        </div>
+        <p class="task-manager__date">You don't have a single task.</p>
+        <ul class="task-manager__container-tasks">
+        </ul>
+        <div class="task-manager__pagination-panel display-none">
+            <button class="task-manager__button task-manager__button_pagination_prev">prev page</button>
+            <div class="task-manager__page"></div>
+            <button class="task-manager__button task-manager__button_pagination_next">next page</button>
+        </div>
+    </div>
+    <template class="template-task">
+        <li class="task-manager__task">
+            <p class="task-manager__task-text"></p>
+            <button class="task-manager__button task-manager__button_task_complete"></button>
+            <button class="task-manager__button task-manager__button_task_delete"></button>
+        </li>
+    </template>
+</body>
+</html>

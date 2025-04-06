@@ -1,0 +1,351 @@
+@import url(fonts/Moderustic.css);
+
+.body {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: linear-gradient(to right, rgb(77, 81, 84), rgb(11, 48, 64));
+    font-family: 'Moderustic', 'Arial', sans-serif;
+    color: rgb(251, 221, 219);
+    transition-duration: 1s;
+}
+
+.task-manager {
+    padding-top: 12vh;
+    padding-right: 100px;
+    min-width: 430px;
+}
+
+.task-manager__theme {
+    position: absolute;
+    top: 40px;
+    right: 20px;
+}
+
+.task-manager__theme :nth-child(n) {
+    margin-right: 10px;
+    border: 1px solid;
+    border-color: rgb(67, 94, 105);
+}
+
+.task-manager__theme :last-child {
+    margin-right: 0;
+}
+
+.task-manager__button_theme_grey {
+    background-image: linear-gradient(to right, rgb(156, 156, 156), rgb(34, 64, 78));
+}
+
+.task-manager__button_theme_white {
+    background-color: white;
+}
+
+.task-manager__button_theme_black {
+    background-color: black;
+}
+
+.task-manager__title {
+    position: relative;
+    margin: 0;
+    color: rgb(251, 221, 219);
+    font-weight: 500;
+    font-size: 90px;
+    letter-spacing: 5px;
+    padding: 0 60px;
+}
+
+.task-manager__line {
+    position: absolute;
+    top: 0;
+    right: 66px;
+    width: 3px;
+    height: 105px;
+    background-color: black;
+}
+
+.task-manager__input-panel {
+    display: flex;
+    margin-top: 46px;
+}
+
+.task-manager__input {
+    flex-grow: 1;
+    background-color: rgb(25, 27, 26);
+    border-radius: 16px 0 0 16px;
+    border: none;
+    min-height: 36px;
+    font-weight: 500;
+    padding-left: 10px;
+    color: rgb(251, 221, 219);
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.task-manager__button {
+    border-radius: 30px;
+    min-width: 35px;
+    min-height: 35px;
+    border: none;
+    transition-duration: .5s;
+}
+
+.task-manager__button:hover {
+    transform: scale(1.1);
+    transition-duration: .5s;
+    cursor: pointer;
+    opacity: .7;
+}
+
+.task-manager__button_task_add {
+    border-radius: 0 16px 16px 0;
+    background-color: rgb(246, 226, 225);
+    font-family: 'Moderustic', 'Arial', sans-serif;
+    padding: 0px 12px;
+    margin-right: 15px;
+    font-size: 15px;
+}
+
+.task-manager__date {
+    color: rgb(164, 154, 163);
+    text-align: center;
+    margin: 25px 0 16px;
+    font-size: 14px;
+}
+
+.task-manager__container-tasks {
+    margin: 0;
+    padding: 0;
+    margin: 0 auto;
+    padding-right: 15px;
+    min-height: 300px;
+}
+
+.task-manager__task {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(37, 46, 53);
+    border-radius: 30px;
+    padding: 5px 0px 5px 15px;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.task-manager__task-text{
+    margin: 0;
+    overflow: hidden;
+    max-height: 23px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.task-manager__task_complete {
+    text-decoration: line-through;
+    color: rgb(111, 111, 113)
+}
+
+.task-manager__button_task_complete{
+    margin-left: auto;
+    margin-right: 11px;
+    background: no-repeat center/cover url(images/pic_success.jpg);
+}
+
+.task-manager__button_task_delete {
+    margin-right: 15px;
+    background: no-repeat center/cover url(images/pic_delete.jpg);
+}
+
+.task-manager__pagination-panel {
+    display: flex;
+    justify-content: center;
+}
+
+.task-manager__page {
+    width: 60px;
+    background-color: white;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.task-manager__button_pagination_prev {
+    background-color: rgb(243, 202, 200);
+}
+.task-manager__button_pagination_next {
+    background-color: rgb(243, 202, 200);
+}
+
+.task-manager__page {
+    background-color: rgb(243, 202, 200);
+}
+
+.body_theme_white {
+    background-image: none;
+    background-color: white;
+}
+
+.body_theme_white .task-manager__title {
+    color: black
+}
+
+.body_theme_white .task-manager__input {
+    background-color: white;
+    border: 2px solid black;
+    color: black
+}
+
+.body_theme_white .task-manager__input:focus-visible {
+    outline: grey solid 2px;
+}
+
+.body_theme_white .task-manager__button_task_add {
+    border: 2px solid black;
+    border-left: none;
+    background-color: white;
+}
+
+.body_theme_white .task-manager__date {
+    color: black;
+}
+
+.body_theme_white .task-manager__task{
+    background-color: white;
+    outline: 2px solid black;
+    color: black;
+}
+
+.body_theme_white .task-manager__task_complete {
+    color: rgb(158, 158, 158);
+}
+
+.body_theme_white .task-manager__button_task_complete{
+    margin-left: auto;
+    margin-right: 11px;
+    background: no-repeat center/cover url(images/pic_success_white.png);
+}
+
+.body_theme_white .task-manager__button_task_delete {
+    margin-right: 15px;
+    background: no-repeat center/cover url(images/pic_delete_white.png);
+}
+
+.body_theme_white .task-manager__button_pagination_prev {
+    border: 1px solid black;
+    background-color: white;
+}
+
+.body_theme_white .task-manager__button_pagination_next {
+    border: 1px solid black;
+    background-color: white;
+}
+
+.body_theme_white .task-manager__page {
+    border: 1px solid black;
+    background-color: white;
+}
+
+.body_theme_black {
+    background-image: none;
+    background-color: black;
+}
+
+.body_theme_black .task-manager__title {
+    color: lightgray
+}
+
+.body_theme_black .task-manager__line {
+    background-color: lightgrey;
+}
+
+.body_theme_black .task-manager__input {
+    background-color: rgb(174, 167, 167);
+    color: black
+}
+
+.body_theme_black .task-manager__button_task_add {
+    background-color: grey;
+    border-left: solid 2px black;
+}
+
+.body_theme_black .task-manager__date {
+    color: lightgray;
+}
+
+.body_theme_black .task-manager__task{
+    background-color: rgb(174, 167, 167);
+    outline: 2px solid black;
+    color: black;
+}
+
+.body_theme_black .task-manager__task_complete {
+    color: rgb(99, 99, 99)
+}
+
+.body_theme_black .task-manager__button_task_complete{
+    margin-left: auto;
+    margin-right: 11px;
+    background: no-repeat center/cover url(images/pic_success_black.png);
+}
+
+.body_theme_black .task-manager__button_task_delete {
+    margin-right: 15px;
+    background: no-repeat center/cover url(images/pic_delete_black.png);
+}
+
+.body_theme_black .task-manager__button_pagination_prev {
+    background-color: rgb(174, 167, 167);;
+}
+
+.body_theme_black .task-manager__button_pagination_next {
+    background-color: rgb(174, 167, 167);;
+}
+
+.body_theme_black .task-manager__page {
+    background-color: rgb(174, 167, 167);;
+}
+
+/* mixins */
+
+.display-none {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .task-manager {
+        padding-right: 0;
+    }
+
+}
+
+@media (max-width: 700px) {
+    .task-manager__title {
+        font-size: 14vw;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+    }
+    .task-manager__line {
+        height: 17vw;
+        position: relative;
+        right: 7px;
+    }
+}
+
+@media (max-width: 500px) {
+    .task-manager {
+        width: 100%;
+        padding: 12vh 15px;
+    }
+    .task-manager__title {
+        font-size: 70px;
+    }
+    .task-manager__line {
+        height: 85px;
+    }
+}

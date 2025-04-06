@@ -141,6 +141,15 @@
     overflow-y: hidden;
 }
 
+.task-manager__task-text::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+}
+.task-manager__task-text::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: grey;
+}
+
 .task-manager__task_complete {
     text-decoration: line-through;
     color: rgb(111, 111, 113)
@@ -350,8 +359,16 @@
     display: none;
 }
 
-.border-red {
-    border: 1px solid red
+.task-manager__task.border-red {
+    outline: 1px solid red
+}
+
+.body_theme_white .task-manager__task.border-red {
+    outline: 2px solid red
+}
+
+.body_theme_black .task-manager__task.border-red {
+    outline: 2px solid red
 }
 
 .horizont {

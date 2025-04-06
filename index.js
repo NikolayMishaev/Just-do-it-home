@@ -63,7 +63,7 @@ const setEventListener = (element, action) => element.addEventListener('click', 
 const saveToLocalStorage = (key, value) => localStorage.setItem(key, JSON.stringify(value));
 
 const checkTaskComplete = (event) => {
-    if (!event.target.className.endsWith('complete')) return
+    if (!event.target.className.endsWith('button_task_complete')) return
     const idCurrentTask = +event.target.closest('.task-manager__task').getAttribute('id')
     arrayTasks = arrayTasks.map(task => {
         if (task.id === idCurrentTask) task.isComplete = !task.isComplete
@@ -74,7 +74,7 @@ const checkTaskComplete = (event) => {
 }
 
 const deleteTask = (event) => {
-    if (!event.target.className.endsWith('delete')) return
+    if (!event.target.className.endsWith('button_task_delete')) return
     const currentTask = event.target.closest('.task-manager__task')
     const idCurrentTask = +currentTask.getAttribute('id')
     arrayTasks = arrayTasks.filter(task => task.id !== idCurrentTask)
@@ -84,11 +84,18 @@ const deleteTask = (event) => {
 }
 
 const selectTask = (event) => {
-    const li = event.target.closest('li')
-    if (li) {
+    console.log(event.target.className.includes('button'))
+    if (event.target.className.includes('button')) return
+    const currentTask = event.target.closest('li')
+    if (currentTask.className.endsWith('border-red')) {
+        removeClasses(currentTask,'border-red')
+        updateDate()
+        return
+    }
+    if (currentTask) {
         Array.from(containerTasks.children).forEach(e=>removeClasses(e,'border-red'))
-        addClasses(li, 'border-red')
-        dateLastTask.textContent = li.getAttribute('data-date')
+        addClasses(currentTask, 'border-red')
+        dateLastTask.textContent = currentTask.getAttribute('data-date')
     }
 }
 

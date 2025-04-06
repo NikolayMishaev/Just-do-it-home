@@ -67,6 +67,7 @@
 .task-manager__input-panel {
     display: flex;
     margin-top: 46px;
+    position: relative;
 }
 
 .task-manager__input {
@@ -80,6 +81,30 @@
     color: rgb(251, 221, 219);
     font-size: 14px;
     letter-spacing: 1px;
+}
+
+.task-manager__input-date {
+    position: absolute;
+    left: 0;
+    top: -42px;
+    flex-grow: unset;
+    opacity: 1;
+    transition: .5s;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator { 
+    filter: invert(100%); 
+    filter: unset;
+}
+
+.task-manager__date-tip {
+    position: absolute;
+    width: 130px;
+    top: -55px;
+    left: 150px;
+    color: rgb(164, 154, 163);
+    font-size: 13px;
+    transition: .5s;
 }
 
 .task-manager__button {
@@ -106,10 +131,25 @@
     font-size: 15px;
 }
 
+.task-manager__select {
+    margin: 0;
+    text-align: center;
+    margin-top: 12px;
+    background-color: rgb(25, 27, 26);
+    color: rgb(251, 221, 219);
+    font-size: 15px;
+    width: 66%;
+    border-radius: 15px;
+    margin: 0 auto;
+    display: flex;
+    margin-top: 10px;
+    height: 27px;
+}
+
 .task-manager__date {
     color: rgb(164, 154, 163);
     text-align: center;
-    margin: 25px 0 16px;
+    margin: 5px 0 16px;
     font-size: 14px;
 }
 
@@ -185,9 +225,11 @@
 
 .task-manager__button_pagination_prev {
     background-color: rgb(243, 202, 200);
+    min-width: 70px;
 }
 .task-manager__button_pagination_next {
     background-color: rgb(243, 202, 200);
+    min-width: 70px;
 }
 
 .task-manager__page {
@@ -374,6 +416,10 @@
 
 .display-none {
     display: none;
+}
+
+.visibility-none {
+    opacity: 0;
 }
 
 .task-manager__task.border-red {

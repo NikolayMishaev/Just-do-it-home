@@ -3,6 +3,7 @@
 const body = document.querySelector('.body')
 const containerBtnsThemes = document.querySelector('.task-manager__theme')
 const inputTask = document.querySelector('.task-manager__input')
+const inputTaskDate = document.querySelector('.task-manager__input-date')
 const buttonTaskAdd = document.querySelector('.task-manager__button_task_add')
 const containerTasks = document.querySelector('.task-manager__container-tasks')
 const templateTask = document.querySelector('.template-task')
@@ -13,6 +14,8 @@ const buttonNextPagination = document.querySelector('.task-manager__button_pagin
 const page = document.querySelector('.task-manager__page')
 const taskmanager = document.querySelector('.task-manager')
 const inputPage = document.querySelector('.task-manager__input-page')
+const dateTip = document.querySelector('.task-manager__date-tip')
+const select = document.querySelector('.task-manager__select')
 
 let arrayTasks = []
 let currentPage = 0
@@ -95,14 +98,20 @@ const selectTask = (event) => {
     if (currentTask) {
         Array.from(containerTasks.children).forEach(e=>removeClasses(e,'border-red'))
         addClasses(currentTask, 'border-red')
-        dateLastTask.textContent = currentTask.getAttribute('data-date')
+        updateDate(arrayTasks.find(task => task.date === currentTask.getAttribute('data-date')))
     }
 }
 
-const updateDate = () => {
-    if (arrayTasks.length > 0) dateLastTask.textContent = arrayTasks.at(-1).date
+const updateDate = (task) => {
+    if (arrayTasks.length > 0) {
+        if (select.value === 'дата выполнения') {
+            dateLastTask.textContent = task ? task. dateCompletion : sortBySelect(arrayTasks)[0].dateCompletion
+        } else dateLastTask.textContent = task ? task.date : arrayTasks.at(-1).date
+    }
     else dateLastTask.textContent = `You don't have a single task.`
 }
+
+const formatDate = (num) =>  String(num).length === 1 ? `0${String(num)}` : String(num)
 
 const getDate = (date) => {
     if (!date) date = new Date()
@@ -113,7 +122,7 @@ const getDate = (date) => {
     const minutes = date.getMinutes()
     const seconds = date.getSeconds()
     const formatedDate = `${day}/${month}/${year}, ${hours}:${minutes}:${seconds} ${hours > 12 ? 'PM' : 'AM'}`
-    return {currentDate: formatedDate, dateInSeconds: date }
+    return {currentDate: formatedDate, dateInSeconds: date, date: `${year}-${formatDate(month)}-${formatDate(day)}` }
 }
 
 const createTask = (dataTask) => {
@@ -126,7 +135,11 @@ const createTask = (dataTask) => {
     containerTasks.append(task)
 }
 
-const sortByID = (tasks) => tasks.toSorted((a, b) => b.id - a.id)
+const sortBySelect = (tasks) => {
+    if (select.value === 'дата выполнения') {
+        return tasks.toSorted((a, b) => new Date(a.dateCompletion) - new Date(b.dateCompletion))
+    }else return tasks.toSorted((a, b) => b.id - a.id)
+}
 
 const setCountPage = () => {
     if (arrayTasks.length < countTasksOnPage) {
@@ -161,7 +174,7 @@ const sliceTasks = () => {
     clearContainerTasks()
     viewPage()
     const currentSlice = currentPage * countTasksOnPage
-    sortByID(arrayTasks).slice(currentSlice, currentSlice + countTasksOnPage).map(task => createTask(task))
+    sortBySelect(arrayTasks).slice(currentSlice, currentSlice + countTasksOnPage).map(task => createTask(task))
 }
 
 const showPaginationPanel = () => paginationPanel.classList.remove('display-none')
@@ -177,6 +190,8 @@ const loadDataFromLocalStorage = () => {
     if (page) currentPage = page
     const id = +localStorage.getItem('id')
     if (id) currentId = id
+    const countTasks = +localStorage.getItem('countTasksOnPage')
+    if (countTasks) countTasksOnPage = countTasks
 }
 
 containerBtnsThemes.addEventListener('click', event => {
@@ -187,14 +202,18 @@ containerBtnsThemes.addEventListener('click', event => {
 
 buttonTaskAdd.addEventListener('click', (event => {
     const taskText = inputTask.value.replaceAll(' ','_')
+    const dateCompletion = inputTaskDate.value
     if (!taskText) return
     const {currentDate, dateInSeconds} = getDate()
-    arrayTasks.push({text: taskText, date: currentDate, dateInSeconds: dateInSeconds, isComplete: false, id: currentId})
+    arrayTasks.push({text: taskText, date: currentDate, dateInSeconds: dateInSeconds, dateCompletion, isComplete: false, id: currentId})
     ++currentId
     saveToLocalStorage('arrayTasks', arrayTasks)
     saveToLocalStorage('id', currentId)
     viewTasks()
     inputTask.value = ''
+    addClasses(inputTaskDate, 'visibility-none')
+    addClasses(dateTip, 'visibility-none')
+    setTimeout(()=>inputTaskDate.value = getDate().date,500)
 }))
 
 buttonPrevPagination.addEventListener('click', ()=> {
@@ -211,17 +230,6 @@ buttonNextPagination.addEventListener('click', ()=> {
     sliceTasks()
 })
 
-// window.addEventListener('orientationchange',()=> {
-//     if (window.matchMedia("(orientation: portrait)").matches) {
-//         console.log('portrait')
-//         addClasses(taskmanager, 'horizont')
-//     }
-//     if (window.matchMedia("(orientation: landscape)").matches) {
-//         console.log('landscape')
-//         removeClasses(taskmanager, 'horizont')
-//     }
-// })
-
 page.addEventListener('click',() => {
     addClasses(page, 'display-none')
     removeClasses(inputPage, 'display-none')
@@ -231,9 +239,25 @@ inputPage.addEventListener('change', (e) => {
     const newCountTaskOnPage = Number(e.target.value)
     if (typeof newCountTaskOnPage === 'number' && newCountTaskOnPage > 0 && newCountTaskOnPage < 21) {
         countTasksOnPage = newCountTaskOnPage
+        saveToLocalStorage('countTasksOnPage', countTasksOnPage)
     }
     addClasses(inputPage, 'display-none')
     removeClasses(page, 'display-none')
+    viewTasks()
+})
+
+inputTask.addEventListener('input', () => {
+    if (inputTaskDate.className.includes('visibility-none')) {
+        removeClasses(inputTaskDate, 'visibility-none')
+        removeClasses(dateTip, 'visibility-none')
+    }
+    if (inputTask.value === '') {
+        addClasses(inputTaskDate, 'visibility-none')
+        addClasses(dateTip, 'visibility-none')
+    }
+})
+
+select.addEventListener('change', (e) => {
     viewTasks()
 })
 
@@ -242,3 +266,5 @@ viewTasks()
 setEventListener(containerTasks, checkTaskComplete)
 setEventListener(containerTasks, deleteTask)
 setEventListener(containerTasks, selectTask)
+
+inputTaskDate.value = getDate().date

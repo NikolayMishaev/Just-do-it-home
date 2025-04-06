@@ -16,17 +16,25 @@
         </div>
         <h1 class = 'task-manager__title'>Just do it.<div class="task-manager__line"></div></h1>
         <div class="task-manager__input-panel">
-            <input class="task-manager__input" placeholder="Add a task.">
-            <button class="task-manager__button task-manager__button_task_add">I Got This!</button>
+            <input class="task-manager__input" placeholder="Добавить задачу">
+            <button class="task-manager__button task-manager__button_task_add">Я сделаю!</button>
+            <input class="task-manager__input task-manager__input-date visibility-none" type='date' value="2025-04-06">
+            <p class="task-manager__date-tip visibility-none">выберите дату выполнения</p>
         </div>
-        <p class="task-manager__date">You don't have a single task.</p>
+        <div class="task-manager__date-container">
+            <select class="task-manager__select">
+                <option>дата создания</option>
+                <option>дата выполнения</option>
+            </select>
+            <p class="task-manager__date">You don't have a single task.</p>
+        </div>
         <ul class="task-manager__container-tasks">
         </ul>
         <div class="task-manager__pagination-panel display-none">
-            <button class="task-manager__button task-manager__button_pagination_prev">prev page</button>
+            <button class="task-manager__button task-manager__button_pagination_prev">НАЗАД</button>
             <div class="task-manager__page"></div>
             <input class="task-manager__input task-manager__input-page display-none" type="number" min="1" max="20" value="3">
-            <button class="task-manager__button task-manager__button_pagination_next">next page</button>
+            <button class="task-manager__button task-manager__button_pagination_next">ВПЕРЕД</button>
         </div>
     </div>
     <template class="template-task">

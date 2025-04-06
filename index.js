@@ -83,6 +83,15 @@ const deleteTask = (event) => {
     viewTasks()
 }
 
+const selectTask = (event) => {
+    const li = event.target.closest('li')
+    if (li) {
+        Array.from(containerTasks.children).forEach(e=>removeClasses(e,'border-red'))
+        addClasses(li, 'border-red')
+        dateLastTask.textContent = li.getAttribute('data-date')
+    }
+}
+
 const updateDate = () => {
     if (arrayTasks.length > 0) dateLastTask.textContent = arrayTasks.at(-1).date
     else dateLastTask.textContent = `You don't have a single task.`
@@ -101,10 +110,11 @@ const getDate = (date) => {
 }
 
 const createTask = (dataTask) => {
-    const {text, isComplete, id} = dataTask
+    const {text, isComplete, id, date} = dataTask
     const task = (templateTask.content.cloneNode(true))
     task.querySelector('.task-manager__task-text').textContent = text
     task.querySelector('.task-manager__task').setAttribute("id", id)
+    task.querySelector('.task-manager__task').setAttribute("data-date",date )
     if (isComplete) task.querySelector('.task-manager__task').classList.add('task-manager__task_complete')
     containerTasks.append(task)
 }
@@ -209,3 +219,4 @@ loadDataFromLocalStorage()
 viewTasks()
 setEventListener(containerTasks, checkTaskComplete)
 setEventListener(containerTasks, deleteTask)
+setEventListener(containerTasks, selectTask)

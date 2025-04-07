@@ -210,6 +210,17 @@ const loadDataFromLocalStorage = () => {
     }
 }
 
+const handleInputPage = (e) => {
+    const newCountTaskOnPage = Number(e.target.value)
+    if (typeof newCountTaskOnPage === 'number' && newCountTaskOnPage > 0 && newCountTaskOnPage < 21) {
+        countTasksOnPage = newCountTaskOnPage
+        saveToLocalStorage('countTasksOnPage', countTasksOnPage)
+    }
+    addClasses(inputPage, 'display-none')
+    removeClasses(page, 'display-none')
+    viewTasks()
+}
+
 containerBtnsThemes.addEventListener('click', event => {
     const theme = getTheme(event)
     if (theme) setTheme(theme)
@@ -254,16 +265,8 @@ page.addEventListener('click',() => {
     inputPage.focus()
 })
 
-inputPage.addEventListener('blur', (e) => {
-    const newCountTaskOnPage = Number(e.target.value)
-    if (typeof newCountTaskOnPage === 'number' && newCountTaskOnPage > 0 && newCountTaskOnPage < 21) {
-        countTasksOnPage = newCountTaskOnPage
-        saveToLocalStorage('countTasksOnPage', countTasksOnPage)
-    }
-    addClasses(inputPage, 'display-none')
-    removeClasses(page, 'display-none')
-    viewTasks()
-})
+inputPage.addEventListener('blur', (e) => handleInputPage(e))
+inputPage.addEventListener('change', (e) => handleInputPage(e))
 
 inputTask.addEventListener('input', () => {
     if (inputTaskDate.className.includes('visibility-none')) {

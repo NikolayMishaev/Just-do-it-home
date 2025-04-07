@@ -86,7 +86,7 @@
 .task-manager__input-date {
     position: absolute;
     left: 0;
-    top: -42px;
+    top: -45px;
     flex-grow: unset;
     opacity: 1;
     transition: .5s;
@@ -134,22 +134,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .task-manager__select {
     margin: 0;
     text-align: center;
-    margin-top: 12px;
     background-color: rgb(25, 27, 26);
     color: rgb(251, 221, 219);
     font-size: 15px;
     width: 66%;
     border-radius: 15px;
     margin: 0 auto;
+    margin-top: 12px;
     display: flex;
-    margin-top: 10px;
     height: 27px;
 }
 
 .task-manager__date {
     color: rgb(164, 154, 163);
     text-align: center;
-    margin: 5px 0 16px;
+    margin: 10px 0 10px;
     font-size: 14px;
 }
 

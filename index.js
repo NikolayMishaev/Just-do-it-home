@@ -105,7 +105,8 @@ const selectTask = (event) => {
 const updateDate = (task) => {
     if (arrayTasks.length > 0) {
         if (select.value === 'дата выполнения') {
-            dateLastTask.textContent = task ? formatDate(task.dateCompletion, 'order') : formatDate(sortBySelect(arrayTasks)[0].dateCompletion, 'order')
+            dateLastTask.textContent = formatDate(inputTaskDate.value, 'order')
+            // dateLastTask.textContent = task ? formatDate(task.dateCompletion, 'order') : formatDate(sortBySelect(arrayTasks)[0].dateCompletion, 'order')
         } else dateLastTask.textContent = task ? task.date : arrayTasks.at(-1).date
     }
     else dateLastTask.textContent = `You don't have a single task.`
@@ -147,6 +148,12 @@ const sortBySelect = (tasks) => {
     }else return tasks.toSorted((a, b) => b.id - a.id)
 }
 
+const filterBySelect = (tasks) => {
+    if (select.value === 'дата выполнения') {
+        return tasks.filter(task =>  task.dateCompletion === inputTaskDate.value)
+    } else return tasks
+}
+
 const setCountPage = () => {
     if (arrayTasks.length < countTasksOnPage) {
         currentPage = 0
@@ -180,7 +187,7 @@ const sliceTasks = () => {
     clearContainerTasks()
     viewPage()
     const currentSlice = currentPage * countTasksOnPage
-    sortBySelect(arrayTasks).slice(currentSlice, currentSlice + countTasksOnPage).map(task => createTask(task))
+    sortBySelect(filterBySelect(arrayTasks)).slice(currentSlice, currentSlice + countTasksOnPage).map(task => createTask(task))
 }
 
 const showPaginationPanel = () => paginationPanel.classList.remove('display-none')
@@ -197,7 +204,10 @@ const loadDataFromLocalStorage = () => {
     const id = +localStorage.getItem('id')
     if (id) currentId = id
     const countTasks = +localStorage.getItem('countTasksOnPage')
-    if (countTasks) countTasksOnPage = countTasks
+    if (countTasks) {
+        countTasksOnPage = countTasks
+
+    }
 }
 
 containerBtnsThemes.addEventListener('click', event => {
@@ -217,9 +227,11 @@ buttonTaskAdd.addEventListener('click', (event => {
     saveToLocalStorage('id', currentId)
     viewTasks()
     inputTask.value = ''
-    addClasses(inputTaskDate, 'visibility-none')
-    addClasses(dateTip, 'visibility-none')
-    setTimeout(()=>inputTaskDate.value = getDate().date,500)
+    if (select.value !== 'дата выполнения') {
+        addClasses(inputTaskDate, 'visibility-none')
+        addClasses(dateTip, 'visibility-none')
+        setTimeout(()=>inputTaskDate.value = getDate().date,500)
+    }
 }))
 
 buttonPrevPagination.addEventListener('click', ()=> {
@@ -265,7 +277,24 @@ inputTask.addEventListener('input', () => {
 })
 
 select.addEventListener('change', (e) => {
+    const selectedOption = e.target.value
+    if (selectedOption === 'дата выполнения') {
+        removeClasses(inputTaskDate, 'visibility-none')
+        removeClasses(dateTip, 'visibility-none')
+        inputTaskDate.focus()
+    } else {
+        addClasses(inputTaskDate, 'visibility-none')
+        addClasses(dateTip, 'visibility-none')
+    }
     viewTasks()
+})
+
+inputTaskDate.addEventListener('change',(e)=> {
+    const selectedOption = select.value
+    if (selectedOption !== 'дата выполнения') return
+    else {
+        viewTasks()
+    }
 })
 
 loadDataFromLocalStorage()
@@ -275,3 +304,4 @@ setEventListener(containerTasks, deleteTask)
 setEventListener(containerTasks, selectTask)
 
 inputTaskDate.value = getDate().date
+inputPage.value = countTasksOnPage

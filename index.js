@@ -105,13 +105,19 @@ const selectTask = (event) => {
 const updateDate = (task) => {
     if (arrayTasks.length > 0) {
         if (select.value === 'дата выполнения') {
-            dateLastTask.textContent = task ? task. dateCompletion : sortBySelect(arrayTasks)[0].dateCompletion
+            dateLastTask.textContent = task ? formatDate(task.dateCompletion, 'order') : formatDate(sortBySelect(arrayTasks)[0].dateCompletion, 'order')
         } else dateLastTask.textContent = task ? task.date : arrayTasks.at(-1).date
     }
     else dateLastTask.textContent = `You don't have a single task.`
 }
 
-const formatDate = (num) =>  String(num).length === 1 ? `0${String(num)}` : String(num)
+const formatDate = (num, option) =>  {
+    switch(option) {
+        case'length': return String(num).length === 1 ? `0${String(num)}` : String(num)
+        case'order': return String(num).split('-').reverse().join('/')
+    }
+    
+}
 
 const getDate = (date) => {
     if (!date) date = new Date()
@@ -122,7 +128,7 @@ const getDate = (date) => {
     const minutes = date.getMinutes()
     const seconds = date.getSeconds()
     const formatedDate = `${day}/${month}/${year}, ${hours}:${minutes}:${seconds} ${hours > 12 ? 'PM' : 'AM'}`
-    return {currentDate: formatedDate, dateInSeconds: date, date: `${year}-${formatDate(month)}-${formatDate(day)}` }
+    return {currentDate: formatedDate, dateInSeconds: date, date: `${year}-${formatDate(month, 'length')}-${formatDate(day, 'length')}` }
 }
 
 const createTask = (dataTask) => {

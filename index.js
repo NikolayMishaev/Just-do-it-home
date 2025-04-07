@@ -239,9 +239,10 @@ buttonNextPagination.addEventListener('click', ()=> {
 page.addEventListener('click',() => {
     addClasses(page, 'display-none')
     removeClasses(inputPage, 'display-none')
+    inputPage.focus()
 })
 
-inputPage.addEventListener('change', (e) => {
+inputPage.addEventListener('blur', (e) => {
     const newCountTaskOnPage = Number(e.target.value)
     if (typeof newCountTaskOnPage === 'number' && newCountTaskOnPage > 0 && newCountTaskOnPage < 21) {
         countTasksOnPage = newCountTaskOnPage
